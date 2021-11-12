@@ -61,7 +61,7 @@ jobs:
 
       - uses: svenstaro/upx-action@v2
         with:
-          file: artifact/${{ matrix.runs-on }}/argo${{ matrix.extension }}
+          file: artifact/${{ matrix.runs-on }}/monadoc${{ matrix.extension }}
           args: --best
 
       - uses: actions/upload-artifact@v2
