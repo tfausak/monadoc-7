@@ -1,4 +1,4 @@
-import qualified Monadoc.Main
+import qualified Monadoc
 
 main :: IO ()
-main = Monadoc.Main.defaultMain
+main = Monadoc.defaultMain
