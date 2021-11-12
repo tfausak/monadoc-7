@@ -19,6 +19,7 @@ jobs:
             ghc-version: 9.2.1
           - runs-on: windows-2019
             ghc-version: 9.2.1
+            extension: .exe
     runs-on: ${{ matrix.runs-on }}
     steps:
 
@@ -50,9 +51,16 @@ jobs:
 
       - run: cabal build
 
+      - run: cabal install --install-method copy --installdir artifact/${{ matrix.runs-on }}
+
       - run: cabal check
 
       - run: cabal sdist --output-dir artifact/${{ matrix.runs-on }}
+
+      - uses: svenstaro/upx-action@v2
+        with:
+          file: artifact/${{ matrix.runs-on }}/argo${{ matrix.extension }}
+          args: --best
 
       - uses: actions/upload-artifact@v2
         with:

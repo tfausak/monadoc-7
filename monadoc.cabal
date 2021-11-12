@@ -37,9 +37,24 @@ common library
     if flag(pedantic)
         ghc-options: -Werror
 
+common executable
+    import: library
+
+    build-depends: monadoc
+    ghc-options:
+        -rtsopts
+        -threaded
+        -Wno-unused-packages
+
 library
     import: library
 
     exposed-modules:
         Monadoc.Main
     hs-source-dirs: source/library
+
+executable monadoc
+    import: executable
+
+    hs-source-dirs: source/executable
+    main-is: Main.hs
