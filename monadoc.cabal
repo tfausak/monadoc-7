@@ -14,4 +14,24 @@ source-repository head
     location: https://github.com/tfausak/monadoc-ng
     type: git
 
+common library
+    build-depends:
+        , base ^>= 4.16.0
+    ghc-options:
+        -Weverything
+        -Wno-all-missed-specialisations
+        -Wno-implicit-prelude
+        -Wno-missing-deriving-strategies
+        -Wno-missing-export-lists
+        -Wno-missing-kind-signatures
+        -Wno-missing-safe-haskell-mode
+        -Wno-prepositive-qualified-module
+        -Wno-safe
+        -Wno-unsafe
+
 library
+    import: library
+
+    exposed-modules:
+        Monadoc.Main
+    hs-source-dirs: source/library
