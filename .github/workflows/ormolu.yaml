@@ -1,0 +1,7 @@
+on: push
+jobs:
+  ormolu:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: mrkkrp/ormolu-action@v4
