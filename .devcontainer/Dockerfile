@@ -4,13 +4,21 @@ FROM ubuntu:"$UBUNTU_TAG"
 ENV LANG=C.UTF-8
 RUN \
   apt-get update && \
-  apt-get install --assume-yes curl gcc git libgmp-dev nano make sudo unzip
+  apt-get install --assume-yes curl gcc git libgmp-dev libtinfo5 nano make sudo unzip
 
 ARG GHCUP_VERSION=0.1.17.3
 RUN \
   curl --output /usr/local/bin/ghcup "https://downloads.haskell.org/~ghcup/$GHCUP_VERSION/x86_64-linux-ghcup-$GHCUP_VERSION" && \
   chmod +x /usr/local/bin/ghcup && \
   ghcup --version
+
+ARG HLINT_VERSION=3.3.4
+RUN \
+  curl --location --output hlint.tgz "https://github.com/ndmitchell/hlint/releases/download/v$HLINT_VERSION/hlint-$HLINT_VERSION-x86_64-linux.tar.gz" && \
+  tar --extract --file hlint.tgz && \
+  mv "hlint-$HLINT_VERSION/hlint" /usr/local/bin && \
+  rm --recursive hlint.tgz hlint-$HLINT_VERSION && \
+  hlint --version
 
 ARG ORMOLU_VERSION=0.3.1.0
 RUN \
