@@ -3,4 +3,15 @@ cabal-version: 3.6
 name: monadoc
 version: 0.2021.11.12
 
+category: Documentation
+description: Monadoc provides worse Haskell documentation.
+license-file: LICENSE.txt
+license: MIT
+maintainer: Taylor Fausak
+synopsis: Worse Haskell documentation.
+
+source-repository head
+    location: https://github.com/tfausak/monadoc-ng
+    type: git
+
 library

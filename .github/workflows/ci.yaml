@@ -7,7 +7,7 @@ on:
   push:
     branches:
       - main
-      
+
 jobs:
   ci:
     strategy:
@@ -49,6 +49,8 @@ jobs:
           restore-keys: ${{ matrix.runs-on }}-${{ matrix.ghc-version }}-
 
       - run: cabal build
+
+      - run: cabal check
 
       - run: cabal sdist --output-dir artifact/${{ matrix.runs-on }}
 
