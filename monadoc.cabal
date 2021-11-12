@@ -11,57 +11,57 @@ maintainer: Taylor Fausak
 synopsis: Worse Haskell documentation.
 
 source-repository head
-    location: https://github.com/tfausak/monadoc-ng
-    type: git
+  location: https://github.com/tfausak/monadoc-ng
+  type: git
 
 flag pedantic
-    default: False
-    description: Enables @-Werror@ to turn warnings into errors.
-    manual: True
+  default: False
+  description: Enables @-Werror@ to turn warnings into errors.
+  manual: True
 
 common library
-    build-depends:
-        , base ^>= 4.16.0
-    ghc-options:
-        -Weverything
-        -Wno-all-missed-specialisations
-        -Wno-implicit-prelude
-        -Wno-missing-deriving-strategies
-        -Wno-missing-export-lists
-        -Wno-missing-kind-signatures
-        -Wno-missing-safe-haskell-mode
-        -Wno-prepositive-qualified-module
-        -Wno-safe
-        -Wno-unsafe
+  build-depends:
+    , base ^>= 4.16.0
+  ghc-options:
+    -Weverything
+    -Wno-all-missed-specialisations
+    -Wno-implicit-prelude
+    -Wno-missing-deriving-strategies
+    -Wno-missing-export-lists
+    -Wno-missing-kind-signatures
+    -Wno-missing-safe-haskell-mode
+    -Wno-prepositive-qualified-module
+    -Wno-safe
+    -Wno-unsafe
 
-    if flag(pedantic)
-        ghc-options: -Werror
+  if flag(pedantic)
+    ghc-options: -Werror
 
 common executable
-    import: library
+  import: library
 
-    build-depends: monadoc
-    ghc-options:
-        -rtsopts
-        -threaded
-        -Wno-unused-packages
+  build-depends: monadoc
+  ghc-options:
+    -rtsopts
+    -threaded
+    -Wno-unused-packages
 
 library
-    import: library
+  import: library
 
-    exposed-modules:
-        Monadoc.Main
-    hs-source-dirs: source/library
+  exposed-modules:
+    Monadoc.Main
+  hs-source-dirs: source/library
 
 executable monadoc
-    import: executable
+  import: executable
 
-    hs-source-dirs: source/executable
-    main-is: Main.hs
+  hs-source-dirs: source/executable
+  main-is: Main.hs
 
 test-suite monadoc-test-suite
-    import: executable
+  import: executable
 
-    hs-source-dirs: source/test-suite
-    main-is: Main.hs
-    type: exitcode-stdio-1.0
+  hs-source-dirs: source/test-suite
+  main-is: Main.hs
+  type: exitcode-stdio-1.0
