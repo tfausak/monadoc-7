@@ -58,3 +58,10 @@ executable monadoc
 
     hs-source-dirs: source/executable
     main-is: Main.hs
+
+test-suite monadoc-test-suite
+    import: executable
+
+    hs-source-dirs: source/test-suite
+    main-is: Main.hs
+    type: exitcode-stdio-1.0

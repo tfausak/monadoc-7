@@ -35,7 +35,7 @@ jobs:
           ghc-version: ${{ matrix.ghc-version }}
           cabal-version: 3.6.2.0
 
-      - run: cabal configure --flags pedantic --jobs
+      - run: cabal configure --enable-tests --flags pedantic --jobs --test-show-details direct
 
       - run: cabal freeze
 
@@ -52,6 +52,8 @@ jobs:
       - run: cabal build
 
       - run: cabal install --install-method copy --installdir artifact/${{ matrix.runs-on }}
+
+      - run: cabal test
 
       - run: cabal check
 
