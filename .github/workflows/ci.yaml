@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+      
+jobs:
+  ci:
+    strategy:
+      matrix:
+        include:
+          - runs-on: macos-11
+            ghc-version: 9.2.1
+          - runs-on: ubuntu-20.04
+            ghc-version: 9.2.1
+          - runs-on: windows-2019
+            ghc-version: 9.2.1
+    runs-on: ${{ matrix.runs-on }}
+    steps:
+
+      - uses: actions/checkout@v2
+
+      - run: mkdir artifact
+
+      - run: mkdir artifact/${{ matrix.runs-on }}
+
+      - id: haskell
+        uses: haskell/actions/setup@v1
+        with:
+          ghc-version: ${{ matrix.ghc-version }}
+          cabal-version: 3.6.2.0
+
+      - run: cabal configure --jobs
+
+      - run: cabal freeze
+
+      - run: cat cabal.project.freeze
+
+      - run: cp cabal.project.freeze artifact/${{ matrix.runs-on }}
+
+      - uses: actions/cache@v2
+        with:
+          path: ${{ steps.haskell.outputs.cabal-store }}
+          key: ${{ matrix.runs-on }}-${{ matrix.ghc-version }}-${{ hashFiles('cabal.project.freeze') }}
+          restore-keys: ${{ matrix.runs-on }}-${{ matrix.ghc-version }}-
+
+      - run: cabal build
+
+      - run: cabal sdist --output-dir artifact/${{ matrix.runs-on }}
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: monadoc-${{ github.sha }}
+          path: artifact
