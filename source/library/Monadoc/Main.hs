@@ -3,6 +3,7 @@ module Monadoc.Main where
 import qualified Control.Monad as Monad
 import qualified Control.Monad.Catch as Exception
 import qualified Data.Version as Version
+import qualified Monadoc.Server as Server
 import qualified Monadoc.Type.Flag as Flag
 import qualified Monadoc.Type.Settings as Settings
 import qualified Paths_monadoc as Package
@@ -25,7 +26,7 @@ mainWith name arguments = do
   Monad.unless (null errors) Exit.exitFailure
 
   withSettings name flags $ \settings -> do
-    print settings
+    Server.serve $ Settings.port settings
 
 getFlags :: [String] -> (([String], [String]), [Flag.Flag])
 getFlags arguments =
