@@ -19,6 +19,12 @@ source-repository-package
   tag: 3cf661a8a9a8ac028df77daa88e8d65c55a3347a
   type: git
 
+-- https://github.com/jacobstanley/unix-compat/pull/47
+source-repository-package
+  location: https://github.com/tfausak/unix-compat
+  tag: 154c3a63f154cb49c51d5f9d13488e8119631d8a
+  type: git
+
 -- https://github.com/yesodweb/wai/pull/863
 source-repository-package
   location: https://github.com/yesodweb/wai
