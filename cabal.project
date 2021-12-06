@@ -24,10 +24,3 @@ source-repository-package
   location: https://github.com/tfausak/unix-compat
   tag: 154c3a63f154cb49c51d5f9d13488e8119631d8a
   type: git
-
--- https://github.com/yesodweb/wai/pull/863
-source-repository-package
-  location: https://github.com/yesodweb/wai
-  subdir: warp
-  tag: 493610faeb7c2dedd28ecb43e6a6adfb6e0f4eac
-  type: git
