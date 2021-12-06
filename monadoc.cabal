@@ -75,6 +75,8 @@ executable monadoc
 test-suite monadoc-test-suite
   import: executable
 
+  build-depends:
+    , hspec ^>= 2.9.3
   hs-source-dirs: source/test-suite
   main-is: Main.hs
   type: exitcode-stdio-1.0

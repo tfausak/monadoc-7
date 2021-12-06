@@ -1,2 +1,5 @@
+import qualified Test.Hspec as Hspec
+
 main :: IO ()
-main = pure ()
+main =
+  Hspec.hspec . Hspec.describe "Monadoc" $ Hspec.it "needs tests" Hspec.pending
