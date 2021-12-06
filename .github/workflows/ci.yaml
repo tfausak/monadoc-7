@@ -13,11 +13,11 @@ jobs:
     strategy:
       matrix:
         include:
-          - platform: macos-11
-          - platform: ubuntu-20.04
-          - platform: windows-2019
+          - platform: macos
+          - platform: ubuntu
+          - platform: windows
             extension: .exe
-    runs-on: ${{ matrix.platform }}
+    runs-on: ${{ matrix.platform }}-latest
     steps:
 
       - uses: actions/checkout@v2
