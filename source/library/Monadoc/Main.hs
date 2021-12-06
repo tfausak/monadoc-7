@@ -30,24 +30,25 @@ mainWith name arguments = do
 
 getFlags :: [String] -> (([String], [String]), [Flag.Flag])
 getFlags arguments =
-  let (flags, xs, ys, errors) = Console.getOpt' Console.Permute options arguments
-      warnings =
-        fmap (mappend "unexpected argument " . quote . newLine) xs
-          <> fmap (mappend "unrecognized option " . quote . newLine) ys
-   in ((warnings, errors), flags)
+  let
+    (flags, xs, ys, errors) = Console.getOpt' Console.Permute options arguments
+    warnings =
+      fmap (mappend "unexpected argument " . quote . newLine) xs
+        <> fmap (mappend "unrecognized option " . quote . newLine) ys
+  in ((warnings, errors), flags)
 
 options :: [Console.OptDescr Flag.Flag]
 options =
   [ Console.Option
-      ['h', '?']
-      ["help"]
-      (Console.NoArg Flag.Help)
-      "shows this help message and exits",
-    Console.Option
-      ['v']
-      ["version"]
-      (Console.NoArg Flag.Version)
-      "outputs the version number and exits"
+    ['h', '?']
+    ["help"]
+    (Console.NoArg Flag.Help)
+    "shows this help message and exits"
+  , Console.Option
+    ['v']
+    ["version"]
+    (Console.NoArg Flag.Version)
+    "outputs the version number and exits"
   ]
 
 newLine :: String -> String
@@ -64,10 +65,9 @@ withSettings name flags callback = do
   settings <- either Exception.throwM pure $ Settings.fromFlags flags
   if Settings.help settings
     then putStr $ Console.usageInfo (name <> " version " <> version) options
-    else
-      if Settings.version settings
-        then putStrLn version
-        else callback settings
+    else if Settings.version settings
+      then putStrLn version
+      else callback settings
 
 version :: String
 version = Version.showVersion Package.version

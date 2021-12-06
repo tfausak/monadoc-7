@@ -9,4 +9,5 @@ serve :: Warp.Port -> IO ()
 serve port = Warp.run port application
 
 application :: Wai.Application
-application _ respond = respond $ Wai.responseLBS Http.notFound404 [] LazyByteString.empty
+application _ respond =
+  respond $ Wai.responseLBS Http.notFound404 [] LazyByteString.empty

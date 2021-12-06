@@ -20,13 +20,12 @@ RUN \
   rm --recursive hlint.tgz hlint-$HLINT_VERSION && \
   hlint --version
 
-ARG ORMOLU_VERSION=0.3.1.0
+ARG BRITTANY_VERSION=0.14.0.0
 RUN \
-  curl --location --output ormolu.zip "https://github.com/tweag/ormolu/releases/download/$ORMOLU_VERSION/ormolu-Linux.zip" && \
-  unzip ormolu.zip && \
-  rm ormolu.zip && \
-  mv ormolu /usr/local/bin && \
-  ormolu --version
+  curl --location --output brittany "https://github.com/tfausak/brittany/releases/download/$BRITTANY_VERSION/brittany-$BRITTANY_VERSION-ubuntu" && \
+  chmod +x brittany && \
+  mv brittany /usr/local/bin && \
+  brittany --version
 
 ARG USER_NAME=haskell
 RUN \
